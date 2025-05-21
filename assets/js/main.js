@@ -1,9 +1,13 @@
+const trendingSection = document.getElementById('trendingstart');
+const trendingSectionHome = document.getElementById('trendinghome');
+const topRatedSection = document.getElementById('topRated');
+const popularSection = document.getElementById('popular');
+const upcomingSection = document.getElementById('upcoming');
+
 // get data from API
 // ======================================
-async function getMovie() {
+async function getMovie(url, sectionID) {
     const accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiYTU5ZmFlNzllYjQ4NzBlM2YyYTc3ZWFhZTgyNmY4NCIsIm5iZiI6MTc0NzU5MzU4MC43Nzc5OTk5LCJzdWIiOiI2ODJhMjk2Y2E4NWE2ZjAxZTRkYjI2MTYiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.UE_n1TZkVTECJsop4ddngFw08IZ3QcS4FuTzk08uI5s';
-
-    const url = 'https://api.themoviedb.org/3/trending/movie/day?language=en-US';
 
     await fetch(url, {
         method: 'GET',
@@ -16,16 +20,20 @@ async function getMovie() {
         .then(data => {
             // console.log(data.results);
             let res = data.results;
-            displayMovie(res);
+            displayMovie(res, sectionID);
 
         })
         .catch(error => { console.error('Error:', error); })
 }
+getMovie('https://api.themoviedb.org/3/trending/movie/day?language=en-US', trendingSection);
+getMovie('https://api.themoviedb.org/3/trending/movie/day?language=en-US', trendingSectionHome);
+getMovie('https://api.themoviedb.org/3/movie/top_rated', topRatedSection);
+getMovie('https://api.themoviedb.org/3/movie/popular', popularSection);
+getMovie('https://api.themoviedb.org/3/movie/upcoming', upcomingSection);
 
-getMovie();
 // ============================================================================================
 // get the results
-function displayMovie(results) {
+function displayMovie(results, sectionID) {
  
     let movieArr = [];
     let movieObj = {};
@@ -44,8 +52,7 @@ function displayMovie(results) {
     });
 
     console.log(movieArr);
-    myMovieSlider(movieArr);
-    // popUp (movieArr);
+    myMovieSlider(movieArr, sectionID);
 }
 
 // ==========================================================================================
@@ -53,10 +60,11 @@ function displayMovie(results) {
 
 let Images = [];
 let myObject = {};
-function myMovieSlider(movies) {
+function myMovieSlider(movies, sectionID) {
 
- const wrapper = document.querySelector('.swiper-wrapper');
-  wrapper.innerHTML = '';
+
+    const wrapper = sectionID.querySelector('.swiper-wrapper');
+    wrapper.innerHTML = '';
  
   movies.forEach(movie => {
 
@@ -101,7 +109,7 @@ function myMovieSlider(movies) {
   });
 
 
-  let swiper = new Swiper('.swiper', {
+  let swiper = new Swiper(sectionID.querySelector('.swiper'), {
     // Optional parameters
     direction: 'horizontal',
     loop: true,
@@ -119,64 +127,25 @@ function myMovieSlider(movies) {
 
     // If we need pagination
     pagination: {
-        el: '.swiper-pagination',
+        el: sectionID.querySelector('.swiper-pagination'),
     },
 
     // Navigation arrows
     navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
+        nextEl: sectionID.querySelector('.swiper-button-next'),
+        prevEl: sectionID.querySelector('.swiper-button-prev'),
     },
 
     // And if we need scrollbar
     scrollbar: {
-        el: '.swiper-scrollbar',
+        el: sectionID.querySelector('.swiper-scrollbar'),
     },
 });
 
-  swiper.update();
-
 }
-// ===============================================================================
-
-// const popUpdiv = document.querySelector('.pop_up_div');
-// const popUpimg = document.querySelector('.pop_up_img');
-// const popUpContainer = document.querySelector('.pop_up_container');
-
-// console.log(popUpdiv);
-// console.log(popUpimg);
-
-// function popUp(images) {
-//   console.log(images);
 
 
-// for(var i = 0; i < images.length; i++) {
 
-//     images[i].addEventListener('click', function(e) {
-
-//         console.log('hello');
-//         var clickedItem = e.target.image.getAttribute('src');
-//         addBackground();
-//         popUpImage(clickedItem);
-//  })
-// }
- 
-// }
-
-// function addBackground() {
-//     console.log('hello from div');
-//     popUpContainer.style.display = 'block';
-//     popUpdiv.style.display = 'block';
-    
-// }
-
-// function popUpImage(clickedItem) {
-
-//     console.log('hello from image');
-//     popUpimg.setAttribute("src",clickedItem);
-//     popUpimg.style.display = 'block';
-
-// }
 
 
 
