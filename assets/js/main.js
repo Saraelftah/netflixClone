@@ -1,8 +1,20 @@
-const trendingSection = document.getElementById('trendingstart');
-const trendingSectionHome = document.getElementById('trendinghome');
-const topRatedSection = document.getElementById('topRated');
-const popularSection = document.getElementById('popular');
-const upcomingSection = document.getElementById('upcoming');
+const movieSections = [
+    {id: 'trendingstart', url: 'https://api.themoviedb.org/3/trending/movie/day?language=en-US'},
+    {id: 'trendinghome', url: 'https://api.themoviedb.org/3/trending/movie/day?language=en-US'},
+    {id: 'topRated', url: 'https://api.themoviedb.org/3/movie/top_rated'},
+    {id: 'popular', url: 'https://api.themoviedb.org/3/movie/popular'},
+    {id: 'upcoming', url: 'https://api.themoviedb.org/3/movie/upcoming'}
+]
+
+movieSections.forEach(section => {
+    const sectionElement = document.getElementById(section.id);
+
+    if(sectionElement) {
+        getMovie(section.url, sectionElement);
+    }else {
+        console.log(`section ${section.id} isn't found`);
+    }
+})
 
 // get data from API
 // ======================================
@@ -25,11 +37,6 @@ async function getMovie(url, sectionID) {
         })
         .catch(error => { console.error('Error:', error); })
 }
-getMovie('https://api.themoviedb.org/3/trending/movie/day?language=en-US', trendingSection);
-getMovie('https://api.themoviedb.org/3/trending/movie/day?language=en-US', trendingSectionHome);
-getMovie('https://api.themoviedb.org/3/movie/top_rated', topRatedSection);
-getMovie('https://api.themoviedb.org/3/movie/popular', popularSection);
-getMovie('https://api.themoviedb.org/3/movie/upcoming', upcomingSection);
 
 // ============================================================================================
 // get the results
@@ -52,62 +59,71 @@ function displayMovie(results, sectionID) {
     });
 
     console.log(movieArr);
+    console.log(sectionID);
+
+    // ============================================
+    // displayMovieInfo(movieArr);
+    // ===========================================
+    
     myMovieSlider(movieArr, sectionID);
 }
 
 // ==========================================================================================
 // make the movie slider
 
-let Images = [];
-let myObject = {};
 function myMovieSlider(movies, sectionID) {
-
 
     const wrapper = sectionID.querySelector('.swiper-wrapper');
     wrapper.innerHTML = '';
  
-  movies.forEach(movie => {
+    movies.forEach(movie => {
 
-    // swiper slide
-    const slide = document.createElement('div');
-    slide.classList.add('swiper-slide');
+        // swiper slide
+        const slide = document.createElement('div');
+        slide.classList.add('swiper-slide');
 
-    // title
-    const title = document.createElement('h3');
-    title.classList.add('title');
+        // title
+        const title = document.createElement('h3');
+        title.classList.add('title');
 
-    // overview
-    const p = document.createElement('p');
-    p.classList.add('overview');
+        // overview
+        const p = document.createElement('p');
+        p.classList.add('overview');
 
-    // image
-    const imgContainer = document.createElement('div');
-    imgContainer.classList.add('img__container');
+        // image
+        const imgContainer = document.createElement('div');
+        imgContainer.classList.add('img__container');
 
-    const img =  document.createElement('img');
-    img.classList.add('movieImage');
-    img.setAttribute('src', `https://image.tmdb.org/t/p/w500${movie.posterPath}`);
-    img.setAttribute('alt', movie.title);
+        const img =  document.createElement('img');
+        img.classList.add('movieImage');
+        img.setAttribute('src', `https://image.tmdb.org/t/p/w500${movie.posterPath}`);
+        img.setAttribute('alt', movie.title);
 
-    imgContainer.appendChild(img);
+        imgContainer.appendChild(img);
 
-    title.innerHTML = movie.title;
-    p.innerHTML = movie.overview;
-// ==========================================
-    // myObject = {
-    //   title: title,
-    //   image: img,
-    //   overview: p,
-    // }
-    // Images.push(myObject);
-// ===========================================
-    slide.appendChild(imgContainer);
-    slide.appendChild(title);
-    slide.appendChild(p);
-  
-    wrapper.appendChild(slide);
+        title.innerHTML = movie.title;
+        p.innerHTML = movie.overview;
+    // ==========================================
+        // myObject = {
+        //   title: title,
+        //   image: img,
+        //   overview: p,
+        // }
+        // Images.push(myObject);
+    // ===========================================
+
+        slide.appendChild(imgContainer);
+        slide.appendChild(title);
+        slide.appendChild(p);
+    
+        wrapper.appendChild(slide);
+
+        // send id as a GET parameter to the url of the view.html
+         slide.addEventListener('click',() => {
+            window.location.href= `view.html?id=${movie.id}`
+         });
+         
   });
-
 
   let swiper = new Swiper(sectionID.querySelector('.swiper'), {
     // Optional parameters
