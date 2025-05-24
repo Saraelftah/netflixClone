@@ -24,22 +24,34 @@
             <div class="signinCard">
                 <h1>Sign Up</h1>
 
-                <form class="signinform">
+                <form class="signinform" id="signup-form">
                     
                     <div class="input">
-                        <div class="input-wrapper">
-                            <input type="email" autocomplete="off" id="signin-input" placeholder=" " />
 
-                            <label for="signin-input" class="input-label">Email address</label>
+                        <div class="input-wrapper">
+                            <input type="name" autocomplete="off" id="name" placeholder=" " />
+                            <label for="signin-input" class="input-label">Name</label>
                         </div>
 
                         <div class="input-wrapper">
-                            <input type="password" autocomplete="off" id="password-input" placeholder=" " />
-
-                            <label for="password-input" class="input-label">password</label>
+                            <input type="email" autocomplete="off" id="email" placeholder=" " />
+                            <label for="email" class="input-label">Email address</label>
                         </div>
 
-                        <button class="btn signin-btn">Sign Up</button>
+                        <div class="input-wrapper">
+                            <input type="password" autocomplete="off" id="password" placeholder=" " />
+                            <label for="password" class="input-label">password</label>
+                        </div>
+
+                         <div class="input-wrapper">
+                            <input type="password" autocomplete="off" id="confirm-password" placeholder=" " />
+                            <label for="confirm-password" class="input-label">Confirm password</label>
+                        </div>
+
+                        <div class="password-match"><i class="fa-regular fa-circle-xmark password-icon"></i>password doesn't match</div>
+
+
+                        <button class="btn signin-btn" id="signupBtn">Sign Up</button>
 
                         <!-- <p>OR</p> -->
 
