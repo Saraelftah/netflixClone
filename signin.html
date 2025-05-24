@@ -23,17 +23,19 @@
             <div class="signinCard">
                 <h1>Sign In</h1>
 
-                <form class="signinform">
+                <form class="signinform" id="signin-form">
                     <div class="input">
                         <div class="input-wrapper">
-                            <input type="email" autocomplete="off" id="signin-input" placeholder=" " />
+                            <input type="email" autocomplete="off" id="signin-email" placeholder=" " />
                             <label for="signin-input" class="input-label">Email address</label>
                         </div>
 
                         <div class="input-wrapper">
-                            <input type="password" autocomplete="off" id="password-input" placeholder=" " />
+                            <input type="password" autocomplete="off" id="signin-password" placeholder=" " />
                             <label for="password-input" class="input-label">password</label>
                         </div>
+
+                        <div class="login-match"><i class="fa-regular fa-circle-xmark password-icon"></i>Invalid email or password</div>
 
                         <button class="btn signin-btn">Sign In</button>
                         <p>OR</p>

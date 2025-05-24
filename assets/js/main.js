@@ -1,3 +1,4 @@
+
 const movieSections = [
     {id: 'trendingstart', url: 'https://api.themoviedb.org/3/trending/movie/day?language=en-US'},
     {id: 'trendinghome', url: 'https://api.themoviedb.org/3/trending/movie/day?language=en-US'},
@@ -168,25 +169,23 @@ function validateSignup () {
         const password = document.getElementById('password').value.trim();
         const confirmPassword = document.getElementById('confirm-password').value.trim();
         const passwordMatch = document.querySelector('.password-match');
+        const emailMatch = document.querySelector('.email-match');
 
         if(password !== confirmPassword){
             console.log('password does not match');
             passwordMatch.style.display = 'block';
             return
         }
-
         try{
-
             const res = await fetch('http://localhost:3000/users');
             const data = await res.json();
             for(const user of data) {
                 if(user.email === email) {
-                    console.log('email alredy exist');
+                    console.log('email already exists');
+                    emailMatch.style.display = 'block';
                     return;
                 }
              }
-        
-
             const response = await fetch("http://localhost:3000/users", {
 
                 method: "POST",
@@ -209,11 +208,59 @@ function validateSignup () {
     });  
     
 }
-validateSignup ();
+// validateSignup ();
+
+function validateSignin(){
+
+    const signinform = document.getElementById('signin-form');
+
+    signinform.addEventListener('submit', async function(e){
+        e.preventDefault();
+
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("signin-password").value.trim();
+
+        const loginMatch = document.querySelector('.login-match')
+
+        try {
+
+             const res = await fetch('http://localhost:3000/users');
+            const data = await res.json();
+
+            const matchedUser = data.find(user => user.email === email && user.password === password);
+
+            if (matchedUser) {
+                alert('Welcome');
+                setToLocalStorage(matchedUser);
+                window.location.href = "home.html";
+            } else {
+                console.log('Invalid email or password');
+                loginMatch.style.display = 'block';
+            }
+
+        }catch(error){
+            console.log('Signin error', error);
+        }
+
+      }); 
+}
+// validateSignin();
+
+function setToLocalStorage(user) {
+    localStorage.setItem('loggedInUser', JSON.stringify({
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        password: user.password
+    }
+    ))
+}
 
 
-
-
+document.addEventListener('DOMContentLoaded', function () {
+  validateSignup();
+  validateSignin();
+});
 
 
 

@@ -523,7 +523,9 @@ input:not(:placeholder-shown) + label {
 }
 
 /* sign up */
-.password-match{
+.password-match, 
+.email-match,
+.login-match {
    font-size: 20px;
     width: 70%;
     padding: 15px 0;
