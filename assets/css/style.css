@@ -390,10 +390,9 @@ input:not(:placeholder-shown) + label {
 .navbar__content {
     display: flex;
     gap: 10%;
-    width: 75%;
+    width: 70%;
 }
 .navbar__list {
-    /* background-color: #C11119; */
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -402,7 +401,6 @@ input:not(:placeholder-shown) + label {
 
 .navbar__list li a{
     font-size: 18px;
-    /* color: #BBBBCB; */
     opacity: 70%;
     transition: 0.5s;
 }
@@ -417,8 +415,41 @@ input:not(:placeholder-shown) + label {
 }
 
 .navbar__btns .nav-icon{
-    margin: 0 20px ;
+    /* margin: 0 20px ; */
 }
+.navbar__btns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    
+}
+
+.search-container{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+}
+
+.searchInput {
+    background-color: #000;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    width: 0%;
+    opacity: 0;
+    transition: 0.5s;
+
+}
+
+.search-container:hover .searchInput{
+    width: 80%;
+    opacity: 1;
+  
+}
+
+
 
 /* ======================== */
 /*home slider */
@@ -490,7 +521,6 @@ input:not(:placeholder-shown) + label {
     margin-bottom: 50px;
 }
 .view__content .content__info {
-    /* background-color: #ffffff20; */
     background-color: #c1111a2e;
     width: 60%;
     border-radius: 20px;

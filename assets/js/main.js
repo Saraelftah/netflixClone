@@ -63,6 +63,7 @@ function displayMovie(results, sectionID) {
     console.log(sectionID);
 
     myMovieSlider(movieArr, sectionID);
+    searchMovies(movieArr, sectionID);
 }
 
 // ==========================================================================================
@@ -100,14 +101,6 @@ function myMovieSlider(movies, sectionID) {
 
         title.innerHTML = movie.title;
         p.innerHTML = movie.overview;
-    // ==========================================
-        // myObject = {
-        //   title: title,
-        //   image: img,
-        //   overview: p,
-        // }
-        // Images.push(myObject);
-    // ===========================================
 
         slide.appendChild(imgContainer);
         slide.appendChild(title);
@@ -121,6 +114,10 @@ function myMovieSlider(movies, sectionID) {
          });
          
   });
+
+//   if (swiperInstance) {
+//         swiperInstance.destroy(true, true);
+//     }
 
   let swiper = new Swiper(sectionID.querySelector('.swiper'), {
     // Optional parameters
@@ -155,6 +152,30 @@ function myMovieSlider(movies, sectionID) {
     },
 });
 
+}
+
+const searchInput = document.getElementById('searchInput');
+const searchMessage = document.querySelector('.search-message');
+
+function searchMovies(movies, sectionID){
+    searchInput.addEventListener('input', function() {
+        const input = searchInput.value.toLowerCase();
+        const filteredMovies = movies.filter(movie => 
+            movie.title.toLowerCase().includes(input));
+
+            searchMessage.style.display = 'none'
+
+            if(filteredMovies.length === 0){
+                sectionID.style.display = 'none';
+                searchMessage.style.display = 'block'
+                searchMessage.textContent = 'No results found';
+            }
+            else  {
+                sectionID.style.display = 'block';
+                myMovieSlider(filteredMovies, sectionID);
+                searchMessage.style.display = 'none'
+            }
+    })
 }
 
 function validateSignup () {
@@ -258,9 +279,17 @@ function setToLocalStorage(user) {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-  validateSignup();
-  validateSignin();
+  if (document.getElementById('signup-form')) {
+    validateSignup();
+  }
+
+  if (document.getElementById('signin-form')) {
+    validateSignin();
+  }
 });
+
+
+
 
 
 
