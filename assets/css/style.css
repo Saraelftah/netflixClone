@@ -552,6 +552,46 @@ input:not(:placeholder-shown) + label {
     height: 100%;
 }
 
+.add-comment{
+    padding-bottom: 150px;
+     width: 60%;
+     margin-top: 20px;
+     
+}
+.add-comment form{
+    margin: auto;
+    width: 60%;
+}
+.add-comment input {
+    width: 70%;
+    padding: 20px 24px;
+    margin-right: 5px;
+    border-radius: 8px;
+    background-color: #000;
+    border: #000;
+    color: #fff;
+    box-shadow: 0px 0px 4px 4px #e50914;
+}
+.add-comment button{
+    padding: 20px 24px;
+}
+
+.commentBox{
+    background-color: #75727242;
+    width: 60%;
+    border-radius: 20px;
+    padding: 20px;
+    overflow: auto;
+    max-height: 500px;
+}
+
+.commentBox .commentinfo {
+    opacity: 80%;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+
 /* sign up */
 .password-match, 
 .email-match,

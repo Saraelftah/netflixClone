@@ -84,3 +84,70 @@ function appendResponse(results) {
 displayMovieInfo(paramValue);
 
 
+const commentForm = document.getElementById('commentForm');
+const commentText = document.getElementById('commentText');
+const commentBox = document.getElementById('commentbox');
+
+const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+
+commentForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const comment = commentText.value;
+
+    if (comment.trim() == ''){
+        return;
+    }else {
+
+        let user = (loggedInUser && loggedInUser.name) ? loggedInUser.name : "Anonymous";
+
+        const newComment = {
+            user: user,
+            text: comment,
+            timestamp: new Date().toISOString(),
+        };
+
+        try {
+                await fetch('http://localhost:3000/comments', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newComment)
+            });
+
+            commentText.value = '';
+            fetchComments();
+
+        }catch(error) {
+            console.error("Error posting comment:", error);
+        }
+    }
+})
+
+
+async function fetchComments() {
+    try{
+        const response = await fetch('http://localhost:3000/comments');
+        const comments = await response.json();
+        console.log('Displaying comments:', comments);
+        displayComments(comments);
+    }
+    catch(error) {
+        console.error('error fetching comments', error);
+    }
+}
+
+function displayComments(comments) {
+    commentBox.innerHTML = '';
+    comments.forEach((comment)=>{
+        const commentElement = document.createElement('div');
+        commentElement.innerHTML = `
+        <p class = "commentinfo"><b>${comment.user}</b> - ${new Date(comment.timestamp).toLocaleString()} - </p>
+        <p>${comment.text}</p>`
+
+        commentBox.appendChild(commentElement);
+    })
+}
+fetchComments();
+
+

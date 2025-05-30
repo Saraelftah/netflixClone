@@ -1,18 +1,18 @@
 
 const movieSections = [
-    {id: 'trendingstart', url: 'https://api.themoviedb.org/3/trending/movie/day?language=en-US'},
-    {id: 'trendinghome', url: 'https://api.themoviedb.org/3/trending/movie/day?language=en-US'},
-    {id: 'topRated', url: 'https://api.themoviedb.org/3/movie/top_rated'},
-    {id: 'popular', url: 'https://api.themoviedb.org/3/movie/popular'},
-    {id: 'upcoming', url: 'https://api.themoviedb.org/3/movie/upcoming'}
+    { id: 'trendingstart', url: 'https://api.themoviedb.org/3/trending/movie/day?language=en-US' },
+    { id: 'trendinghome', url: 'https://api.themoviedb.org/3/trending/movie/day?language=en-US' },
+    { id: 'topRated', url: 'https://api.themoviedb.org/3/movie/top_rated' },
+    { id: 'popular', url: 'https://api.themoviedb.org/3/movie/popular' },
+    { id: 'upcoming', url: 'https://api.themoviedb.org/3/movie/upcoming' }
 ]
 
 movieSections.forEach(section => {
     const sectionElement = document.getElementById(section.id);
 
-    if(sectionElement) {
+    if (sectionElement) {
         getMovie(section.url, sectionElement);
-    }else {
+    } else {
         console.log(`section ${section.id} isn't found`);
     }
 })
@@ -42,7 +42,7 @@ async function getMovie(url, sectionID) {
 // ============================================================================================
 // get the results
 function displayMovie(results, sectionID) {
- 
+
     let movieArr = [];
     let movieObj = {};
 
@@ -73,7 +73,7 @@ function myMovieSlider(movies, sectionID) {
 
     const wrapper = sectionID.querySelector('.swiper-wrapper');
     wrapper.innerHTML = '';
- 
+
     movies.forEach(movie => {
 
         // swiper slide
@@ -92,7 +92,7 @@ function myMovieSlider(movies, sectionID) {
         const imgContainer = document.createElement('div');
         imgContainer.classList.add('img__container');
 
-        const img =  document.createElement('img');
+        const img = document.createElement('img');
         img.classList.add('movieImage');
         img.setAttribute('src', `https://image.tmdb.org/t/p/w500${movie.posterPath}`);
         img.setAttribute('alt', movie.title);
@@ -105,84 +105,85 @@ function myMovieSlider(movies, sectionID) {
         slide.appendChild(imgContainer);
         slide.appendChild(title);
         slide.appendChild(p);
-    
+
         wrapper.appendChild(slide);
 
         // send id as a GET parameter to the url of the view.html
-         slide.addEventListener('click',() => {
-            window.location.href= `view.html?id=${movie.id}`
-         });
-         
-  });
+        slide.addEventListener('click', () => {
+            window.location.href = `view.html?id=${movie.id}`
+        });
 
-//   if (swiperInstance) {
-//         swiperInstance.destroy(true, true);
-//     }
+    });
 
-  let swiper = new Swiper(sectionID.querySelector('.swiper'), {
-    // Optional parameters
-    direction: 'horizontal',
-    loop: true,
-    slidesPerView: 5,
-    spaceBetween: 20,
+    //   if (swiperInstance) {
+    //         swiperInstance.destroy(true, true);
+    //     }
 
-    effect: 'coverflow',
-    coverflowEffect: {
-    rotate: 30,
-    stretch: 0,
-    depth: 100,
-    modifier: 1,
-    slideShadows: true,
-  },
+    let swiper = new Swiper(sectionID.querySelector('.swiper'), {
+        // Optional parameters
+        direction: 'horizontal',
+        loop: true,
+        slidesPerView: 5,
+        spaceBetween: 20,
 
-    // If we need pagination
-    pagination: {
-        el: sectionID.querySelector('.swiper-pagination'),
-    },
+        effect: 'coverflow',
+        coverflowEffect: {
+            rotate: 30,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: true,
+        },
 
-    // Navigation arrows
-    navigation: {
-        nextEl: sectionID.querySelector('.swiper-button-next'),
-        prevEl: sectionID.querySelector('.swiper-button-prev'),
-    },
+        // If we need pagination
+        pagination: {
+            el: sectionID.querySelector('.swiper-pagination'),
+        },
 
-    // And if we need scrollbar
-    scrollbar: {
-        el: sectionID.querySelector('.swiper-scrollbar'),
-    },
-});
+        // Navigation arrows
+        navigation: {
+            nextEl: sectionID.querySelector('.swiper-button-next'),
+            prevEl: sectionID.querySelector('.swiper-button-prev'),
+        },
+
+        // And if we need scrollbar
+        scrollbar: {
+            el: sectionID.querySelector('.swiper-scrollbar'),
+        },
+    });
 
 }
 
 const searchInput = document.getElementById('searchInput');
 const searchMessage = document.querySelector('.search-message');
 
-function searchMovies(movies, sectionID){
-    searchInput.addEventListener('input', function() {
+function searchMovies(movies, sectionID) {
+    searchInput.addEventListener('input', function () {
         const input = searchInput.value.toLowerCase();
-        const filteredMovies = movies.filter(movie => 
+        const filteredMovies = movies.filter(movie =>
             movie.title.toLowerCase().includes(input));
 
-            searchMessage.style.display = 'none'
+        searchMessage.style.display = 'none'
 
-            if(filteredMovies.length === 0){
-                sectionID.style.display = 'none';
-                searchMessage.style.display = 'block'
-                searchMessage.textContent = 'No results found';
-            }
-            else  {
-                sectionID.style.display = 'block';
-                myMovieSlider(filteredMovies, sectionID);
-                searchMessage.style.display = 'none'
-            }
+        if (filteredMovies.length === 0) {
+            sectionID.style.display = 'none';
+            searchMessage.style.display = 'block'
+            searchMessage.textContent = 'No results found';
+        }
+        else {
+            sectionID.style.display = 'block';
+            myMovieSlider(filteredMovies, sectionID);
+            searchMessage.style.display = 'none'
+        }
     })
 }
 
-function validateSignup () {
-  
+// validateSignup ();
+function validateSignup() {
+
     const signupForm = document.getElementById('signup-form');
 
-    signupForm.addEventListener('submit', async function(e){
+    signupForm.addEventListener('submit', async function (e) {
         e.preventDefault();
 
         const name = document.getElementById('name').value.trim();
@@ -192,50 +193,50 @@ function validateSignup () {
         const passwordMatch = document.querySelector('.password-match');
         const emailMatch = document.querySelector('.email-match');
 
-        if(password !== confirmPassword){
+        if (password !== confirmPassword) {
             console.log('password does not match');
             passwordMatch.style.display = 'block';
             return
         }
-        try{
+        try {
             const res = await fetch('http://localhost:3000/users');
             const data = await res.json();
-            for(const user of data) {
-                if(user.email === email) {
+            for (const user of data) {
+                if (user.email === email) {
                     console.log('email already exists');
                     emailMatch.style.display = 'block';
                     return;
                 }
-             }
+            }
             const response = await fetch("http://localhost:3000/users", {
 
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({name, email, password})
+                body: JSON.stringify({ name, email, password })
             });
 
             if (response.ok) {
                 window.location.href = "signin.html";
 
-            }else{
+            } else {
                 console.log('Registration failed!')
             }
-        } catch(error)
-         { console.error('Signup Error:', error);
-         }
-   
-    });  
-    
-}
-// validateSignup ();
+        } catch (error) {
+            console.error('Signup Error:', error);
+        }
 
-function validateSignin(){
+    });
+
+}
+
+
+function validateSignin() {
 
     const signinform = document.getElementById('signin-form');
 
-    signinform.addEventListener('submit', async function(e){
+    signinform.addEventListener('submit', async function (e) {
         e.preventDefault();
 
         const email = document.getElementById("email").value.trim();
@@ -245,7 +246,7 @@ function validateSignin(){
 
         try {
 
-             const res = await fetch('http://localhost:3000/users');
+            const res = await fetch('http://localhost:3000/users');
             const data = await res.json();
 
             const matchedUser = data.find(user => user.email === email && user.password === password);
@@ -259,11 +260,11 @@ function validateSignin(){
                 loginMatch.style.display = 'block';
             }
 
-        }catch(error){
+        } catch (error) {
             console.log('Signin error', error);
         }
 
-      }); 
+    });
 }
 // validateSignin();
 
@@ -279,16 +280,14 @@ function setToLocalStorage(user) {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-  if (document.getElementById('signup-form')) {
-    validateSignup();
-  }
+    if (document.getElementById('signup-form')) {
+        validateSignup();
+    }
 
-  if (document.getElementById('signin-form')) {
-    validateSignin();
-  }
+    if (document.getElementById('signin-form')) {
+        validateSignin();
+    }
 });
-
-
 
 
 
