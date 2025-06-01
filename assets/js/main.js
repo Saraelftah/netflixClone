@@ -53,7 +53,6 @@ function displayMovie(results, sectionID) {
             overview: res.overview,
             posterPath: res.poster_path,
         }
-
         // console.log(movieObj)
         movieArr.push(movieObj);
 
@@ -114,10 +113,6 @@ function myMovieSlider(movies, sectionID) {
         });
 
     });
-
-    //   if (swiperInstance) {
-    //         swiperInstance.destroy(true, true);
-    //     }
 
     let swiper = new Swiper(sectionID.querySelector('.swiper'), {
         // Optional parameters
@@ -288,7 +283,3 @@ document.addEventListener('DOMContentLoaded', function () {
         validateSignin();
     }
 });
-
-
-
-

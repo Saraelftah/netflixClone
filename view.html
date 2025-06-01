@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,29 +15,55 @@
     <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="assets/js/main.js" defer></script>
 </head>
+
 <body>
 
-    <section class="hero-view" >
-        
-         <div class="navbar__logo">
-                <img src="./assets/images/Netflix-Logo.png" alt="logo" />
+    <section class="hero-view">
+
+        <div class="navbar__logo">
+            <img src="./assets/images/Netflix-Logo.png" alt="logo" />
         </div>
-            
+
         <div class="view-container"></div>
 
         <div class="commentBox" id="commentbox"></div>
 
-         <div class="add-comment">
+        <div class="add-comment">
             <form class="comment-form" id="commentForm">
                 <input type="text" placeholder="Add a comment" autocomplete="off" id="commentText">
                 <button type="submit" class="btn">Comment</button>
             </form>
         </div>
-        
+
     </section>
 
-   
+    <!-- chatBot -->
+    <!-- floating icon -->
+    <div id="chatbot-icon">🗨</div>
+
+    <!-- chatbot container -->
+    <div id="chatbot-container" class="hidden">
+        <!-- chatbot header -->
+        <div id="chatbot-header">
+            <span>ChatBot</span>
+            <button id="close-btn"><i class="fa-solid fa-circle-xmark"></i></button>
+        </div>
+
+        <!-- chatbot body -->
+        <div id="chatbot-body">
+            <div id="chatbot-message"></div>
+        </div>
+
+        <!-- user input container -->
+        <div id="chatbot-input-container">
+            <input type="text" id="chatbot-input" placeholder="How can I help you?" autocomplete="off">
+            <button id="send-btn">Send</button>
+        </div>
+
+    </div>
 
     <script src="assets/js/view.js"></script>
+    <script src="assets/js/chatbot.js"></script>
 </body>
+
 </html>

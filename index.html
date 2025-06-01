@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
     <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="assets/js/main.js" defer></script>
 </head>
@@ -86,6 +85,32 @@
         </div>
     </section>
 
+    <!-- chatBot -->
+    <!-- floating icon -->
+    <div id="chatbot-icon">🗨</div>
+
+    <!-- chatbot container -->
+    <div id="chatbot-container" class="hidden">
+        <!-- chatbot header -->
+        <div id="chatbot-header">
+            <span>ChatBot</span>
+            <button id="close-btn"><i class="fa-solid fa-circle-xmark"></i></button>
+        </div>
+
+        <!-- chatbot body -->
+        <div id="chatbot-body">
+            <div id="chatbot-message"></div>
+        </div>
+
+        <!-- user input container -->
+        <div id="chatbot-input-container">
+            <input type="text" id="chatbot-input" placeholder="How can I help you?" autocomplete="off">
+            <button id="send-btn">Send</button>
+        </div>
+
+    </div>
+
+    <script src="assets/js/chatbot.js"></script>
 </body>
 
 </html>
