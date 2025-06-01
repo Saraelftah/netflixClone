@@ -1,11 +1,11 @@
-
+// define movie sections
 const movieSections = [
     { id: 'trendingstart', url: 'https://api.themoviedb.org/3/trending/movie/day?language=en-US' },
     { id: 'trendinghome', url: 'https://api.themoviedb.org/3/trending/movie/day?language=en-US' },
     { id: 'topRated', url: 'https://api.themoviedb.org/3/movie/top_rated' },
     { id: 'popular', url: 'https://api.themoviedb.org/3/movie/popular' },
     { id: 'upcoming', url: 'https://api.themoviedb.org/3/movie/upcoming' }
-]
+];
 
 movieSections.forEach(section => {
     const sectionElement = document.getElementById(section.id);
@@ -18,7 +18,7 @@ movieSections.forEach(section => {
 })
 
 // get data from API
-// ======================================
+// ===============================================================
 async function getMovie(url, sectionID) {
     const accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiYTU5ZmFlNzllYjQ4NzBlM2YyYTc3ZWFhZTgyNmY4NCIsIm5iZiI6MTc0NzU5MzU4MC43Nzc5OTk5LCJzdWIiOiI2ODJhMjk2Y2E4NWE2ZjAxZTRkYjI2MTYiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.UE_n1TZkVTECJsop4ddngFw08IZ3QcS4FuTzk08uI5s';
 
@@ -40,7 +40,8 @@ async function getMovie(url, sectionID) {
 }
 
 // ============================================================================================
-// get the results
+// process the results data
+const allMovies = {};
 function displayMovie(results, sectionID) {
 
     let movieArr = [];
@@ -52,17 +53,20 @@ function displayMovie(results, sectionID) {
             title: res.title,
             overview: res.overview,
             posterPath: res.poster_path,
+            originalSectionID: sectionID.id
         }
         // console.log(movieObj)
         movieArr.push(movieObj);
 
     });
 
-    console.log(movieArr);
-    console.log(sectionID);
+    // store movies for this section
+    allMovies[sectionID.id] = movieArr;
+    console.log('this is from all movies', allMovies);
+    // console.log(movieArr);
+    // console.log(sectionID);
 
     myMovieSlider(movieArr, sectionID);
-    searchMovies(movieArr, sectionID);
 }
 
 // ==========================================================================================
@@ -140,38 +144,41 @@ function myMovieSlider(movies, sectionID) {
             nextEl: sectionID.querySelector('.swiper-button-next'),
             prevEl: sectionID.querySelector('.swiper-button-prev'),
         },
-
-        // And if we need scrollbar
-        scrollbar: {
-            el: sectionID.querySelector('.swiper-scrollbar'),
-        },
     });
-
 }
 
 const searchInput = document.getElementById('searchInput');
 const searchMessage = document.querySelector('.search-message');
 
-function searchMovies(movies, sectionID) {
+function searchMovies() {
     searchInput.addEventListener('input', function () {
-        const input = searchInput.value.toLowerCase();
-        const filteredMovies = movies.filter(movie =>
-            movie.title.toLowerCase().includes(input));
+        const input = searchInput.value.toLowerCase().trim();
+        let anyResultsFound = false;
 
-        searchMessage.style.display = 'none'
+        for (const sectionID in allMovies) {
+            const sectionElement = document.getElementById(sectionID);
+            const filteredMovies = allMovies[sectionID].filter(movie =>
+                movie.title.toLowerCase().includes(input)
+            );
+            if (filteredMovies.length === 0) {
+                sectionElement.style.display = 'none';
+            }else {
+                sectionElement.style.display = 'block'
+                myMovieSlider(filteredMovies, sectionElement);
+                 anyResultsFound = true;
 
-        if (filteredMovies.length === 0) {
-            sectionID.style.display = 'none';
-            searchMessage.style.display = 'block'
+            }
+        }
+
+        if(!anyResultsFound) {
+            searchMessage.style.display = 'block';
             searchMessage.textContent = 'No results found';
-        }
-        else {
-            sectionID.style.display = 'block';
-            myMovieSlider(filteredMovies, sectionID);
-            searchMessage.style.display = 'none'
-        }
+        }else {
+            searchMessage.style.display = 'none';
+        }  
     })
 }
+searchMovies();
 
 // validateSignup ();
 function validateSignup() {
@@ -226,7 +233,7 @@ function validateSignup() {
 
 }
 
-
+// validate sign in
 function validateSignin() {
 
     const signinform = document.getElementById('signin-form');
@@ -261,8 +268,8 @@ function validateSignin() {
 
     });
 }
-// validateSignin();
 
+// set data to local storage
 function setToLocalStorage(user) {
     localStorage.setItem('loggedInUser', JSON.stringify({
         id: user.id,
@@ -272,7 +279,6 @@ function setToLocalStorage(user) {
     }
     ))
 }
-
 
 document.addEventListener('DOMContentLoaded', function () {
     if (document.getElementById('signup-form')) {
