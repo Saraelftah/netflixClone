@@ -35,6 +35,12 @@ p {
 
 h2 {
     font-size: 36px;
+    line-height: 48px;
+}
+
+h3 {
+    font-size: 26px;
+    line-height: 32px;
 }
 
 .container {
@@ -64,7 +70,6 @@ h2 {
 .header {
     position: relative;
     background: url(../images/background.jpg) center center/cover;
-    /* height: 100vh; */
 }
 
 .header .container {
@@ -204,6 +209,93 @@ input:not(:placeholder-shown)+label {
     padding: 2px;
     border: none;
 }
+
+.reasons-items,
+.questions{
+    padding: 40px 0;
+    background-color: #000;
+}
+
+.reasons-items h2 {
+    margin-bottom: 16px;
+}
+.reasons-items-container {
+    display: flex;
+    justify-content:space-between;
+    gap: 20px;
+}
+
+.reasons-item {
+    width: 25%;
+    padding: 10px;
+    border-radius: 15px; 
+    background-image: linear-gradient(to right, #c1111a2e 10%, transparent);
+    position: relative;
+}
+
+.reasons-item h3,
+.questions .question-title {
+    margin-bottom: 20px;
+}
+
+.reasons-item p {
+    opacity: 80%;
+    font-weight: 400;
+    margin-bottom: 50px;
+}
+
+.reasons-item .icon {
+    position: absolute;
+    bottom: 5px;
+    right: 15px;
+    font-size: 30px;
+}
+
+/* questions */
+.question-container{
+    margin-bottom: 10px;
+}
+
+.question,
+.answer{
+    background: rgb(45,45,45);
+    padding: 30px 20px;
+}
+
+.question{
+    margin-bottom: 1px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.question:hover {
+    cursor: pointer;
+    background-color: #444;
+}
+
+.question-icon {
+    font-size: 35px;
+    font-weight: 100;
+    transition: 0.2s;
+}
+
+.answer{
+   display: none;
+}
+.rotate {
+    transform: rotate(45deg);
+}
+.transition {
+    transition: 0.5s;
+}
+
+.answer p {
+    opacity: 80%;
+    font-weight: 400;
+}
+
 
 /* Floating Chat Icon */
 #chatbot-icon {
