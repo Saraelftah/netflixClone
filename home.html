@@ -21,20 +21,25 @@
     <!-- home nav bar -->
     <header class="hero">
         <div class="home-container">
-        
+
             <nav class="navbar home-nav">
-                
+
                 <div class="navbar__content">
                     <div class="navbar__logo">
                         <img src="./assets/images/Netflix-Logo.png" alt="logo" />
                     </div>
 
-                    <ul class="navbar__list">
+                    <button class="burger-menu" id="burgerToggle">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+
+                    <ul class="navbar__list" id="navbarList">
                         <li><a href="#" class="active">Home</a></li>
                         <li><a href="#trendinghome">Trending Now</a></li>
                         <li><a href="#topRated">Top Rated</a></li>
                         <li><a href="#popular">New & Popular</a></li>
                         <li><a href="#upcoming">Upcoming</a></li>
+                        <li class="hide" id="signOutbtn"><a href="signin.html" class="btn signout-btn">Sign Out</a></li>
                     </ul>
                 </div>
 
@@ -43,10 +48,10 @@
                         <input type="text" id="searchInput" class="searchInput" placeholder="Search movies...">
                         <a href="#"><i class="fa-solid fa-magnifying-glass nav-icon"></i></a>
                     </div>
-                    <a href="signin.html" class="btn btn-signin">Sign Out</a>
+                    <a href="signin.html" class="btn signout-btn">Sign Out</a>
                 </div>
-            </nav>
 
+            </nav>
         </div>
 
     </header>
@@ -171,6 +176,17 @@
     </div>
 
     <script src="assets/js/chatbot.js"></script>
+
+    <script>
+        const burger = document.getElementById('burgerToggle');
+        const navList = document.getElementById('navbarList');
+        const signOutBtn = document.getElementById('signOutbtn');
+
+        burger.addEventListener('click', () => {
+            navList.classList.toggle('show');
+            signOutBtn.classList.toggle('show');
+        });
+    </script>
 </body>
 
 </html>
