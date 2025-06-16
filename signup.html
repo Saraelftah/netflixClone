@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="icon" type="image/x-icon" href="assets/images/favcon.png">
 
     <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="assets/js/main.js" defer></script>
 </head>
 
 <body>
@@ -29,19 +29,19 @@
                     <div class="input">
 
                         <div class="input-wrapper">
-                            <input type="name" autocomplete="off" id="name" placeholder=" " />
+                            <input type="name" autocomplete="off" id="name" placeholder=" " required/>
                             <label for="signin-input" class="input-label">Name</label>
                         </div>
 
                         <div class="input-wrapper">
-                            <input type="email" autocomplete="off" id="email" placeholder=" " />
+                            <input type="email" autocomplete="off" id="email" placeholder=" " required/>
                             <label for="email" class="input-label">Email address</label>
                         </div>
 
                         <div class="email-match"><i class="fa-regular fa-circle-xmark password-icon"></i>Email alresdy exists</div>
 
                         <div class="input-wrapper">
-                            <input type="password" autocomplete="off" id="password" placeholder=" " />
+                            <input type="password" autocomplete="off" id="password" placeholder=" " required/>
                             <label for="password" class="input-label">password</label>
                         </div>
 
@@ -54,18 +54,13 @@
 
 
                         <button class="btn signin-btn" id="signupBtn">Sign Up</button>
-
-                        <!-- <p>OR</p> -->
-
-                        <!-- <button class="btn signin-btn">Use a Sign-In Code</button> -->
-
+                        <p>OR</p>
+                         <button class="btn signin-btn">Use a Sign-In Code</button>
                     </div>
                 </form>
-
             </div>
-
         </div>
     </section>
+    <script src="assets/js/signup.js"></script>
 </body>
-
 </html>

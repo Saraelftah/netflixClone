@@ -431,7 +431,7 @@ input:not(:placeholder-shown)+label {
 
 
 /* ============================================================= */
-/* swipre */
+/* swiper */
 .trending {
     border-top: 4px solid #e50914;
     clip-path: ellipse(100% 98% at 50% 100%);
@@ -793,6 +793,7 @@ input:not(:placeholder-shown)+label {
     height: 100%;
 }
 
+/* comment */
 .add-comment {
     padding-bottom: 150px;
     width: 60%;
@@ -805,6 +806,12 @@ input:not(:placeholder-shown)+label {
     width: 60%;
 }
 
+.comment{
+    padding: 20px 10px;
+    margin-bottom: 10px;
+    background-color: #c1111a1e;
+    border-radius: 10px;
+}
 .add-comment input {
     width: 70%;
     padding: 20px 24px;
@@ -831,10 +838,9 @@ input:not(:placeholder-shown)+label {
 
 .commentBox .commentinfo {
     opacity: 80%;
-    font-size: 20px;
+    font-size: 16px;
     line-height: 24px;
 }
-
 
 /* sign up */
 .password-match,

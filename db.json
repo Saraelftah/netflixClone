@@ -17,7 +17,27 @@
       "name": "sara",
       "email": "asara9086@gmail.com",
       "password": "502681"
+    },
+    {
+      "id": "2baa",
+      "name": "Maria",
+      "email": "mariamohamed@gmail.com",
+      "password": "123456"
+    },
+    {
+      "id": "d3a9",
+      "name": "mona",
+      "email": "mona@gmail.com",
+      "password": "mona12"
     }
   ],
-  "comments": []
+  "comments": [
+    {
+      "id": "5e87",
+      "user": "Anonymous",
+      "text": "great movie",
+      "timestamp": "2025-06-16T17:31:37.820Z"
+    }
+  
+  ]
 }

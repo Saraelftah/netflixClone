@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="icon" type="image/x-icon" href="assets/images/favcon.png">
 
     <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="assets/js/main.js" defer></script>
 </head>
 
 <body>
@@ -26,12 +26,12 @@
                 <form class="signinform" id="signin-form">
                     <div class="input">
                         <div class="input-wrapper">
-                            <input type="email" autocomplete="off" id="signin-email" placeholder=" " />
+                            <input type="email" autocomplete="off" id="signin-email" placeholder=" " required/>
                             <label for="signin-input" class="input-label">Email address</label>
                         </div>
 
                         <div class="input-wrapper">
-                            <input type="password" autocomplete="off" id="signin-password" placeholder=" " />
+                            <input type="password" autocomplete="off" id="signin-password" placeholder=" " required/>
                             <label for="password-input" class="input-label">password</label>
                         </div>
 
@@ -52,6 +52,8 @@
 
         </div>
     </section>
+
+    <script src="assets/js/signin.js"></script>
 </body>
 
 </html>
